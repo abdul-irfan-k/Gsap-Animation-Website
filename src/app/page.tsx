@@ -9,13 +9,9 @@ const HomePage = () => {
   useEffect(() => {
     (
       async () => {
-          // const LocomotiveScroll = (await import('locomotive-scroll')).default
-          // const locomotiveScroll = new LocomotiveScroll();
+          const LocomotiveScroll = (await import('locomotive-scroll')).default
+          const locomotiveScroll = new LocomotiveScroll();
 
-          setTimeout(() => {
-            console.log("updated")
-            // locomotiveScroll.stop()
-          },6000)
       }
     )()
   }, []);

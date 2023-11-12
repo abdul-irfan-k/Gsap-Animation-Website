@@ -18,47 +18,39 @@ const MainContent = () => {
     gsap.registerPlugin(ScrollTrigger);
     const element = imageContainer.current;
 
-    ScrollTrigger.create({
-      // scrollTrigger: {
+    gsap.to(element,{
+      scrollTrigger: {
       trigger: element,
-      start: "too top",
+      start: "too 100",
       // start: "top-=100px",
-      end: "1800 150px",
+      end: "1200 100",
       scrub: 1,
-      pin: testRef.current,
-      // pinSpacing:true,
-      markers: {
-        startColor: "red",
-        endColor: "green",
-      },
+      pin: true,
+      pinSpacing:true,
+      // markers: {
+      //   startColor: "red",
+      //   endColor: "green",
+      // },
 
       toggleActions: "restart none none none",
       onToggle: (ev) => {
         console.log("toggle");
         setIsActiveScrollAnimation(true);
       },
-      // },
-      // clipPath: `inset(0% 0%)`,
+      },
+      clipPath: `inset(0% 0%)`,
       // top: "0",
       // direction: "top",
     });
+
   }, []);
 
-  useEffect(() => {
-    console.log("changed ");
-    if (imageContainer.current! - undefined) {
-    }
-  }, [isActiveScrollAnimation]);
-
-  useEffect(() => {
-    console.log("image container ", imageContainer.current);
-  }, [imageContainer.current]);
 
   return (
     <div className="flex flex-col items-center">
       <div className="mt-10 text-7xl font-medium">THE MANIFESTO</div>
       <div className="my-3 text-7xl font-extrabold">PORTFOLIO WEBSITE</div>
-      <div className="mt-5 pb-64 translate-x-[50%] font-bold text-lg">
+      <div className="mt-5  translate-x-[50%] font-bold text-lg">
         Experience the <br />
         perfect belnd of creativity <br />
         and functionality
@@ -66,29 +58,22 @@ const MainContent = () => {
 
       <div
         ref={imageContainer}
-        className=" relative  flex align-top bg-green-400 w-full  overflow-hidden"
+        className="mt-32 relative  flex align-top h-[80vh] w-full  overflow-hidden"
         style={{
           width: "100%",
+          clipPath:"inset(0% 30%)"
         }}
-        // animate={{transition:{delay:0.5}}}
       >
-        {/* <Image
-              alt="image"
-              src={"/Asset/00hero.jpg"}
-              fill
-              className="scale-[1.25] "
-            /> */}
-        {/* </div> */}
 
         <div
-          className="relative   h-[50vh] w-full bg-red-400 overflow-hidden"
+          className="relative   h-full w-full overflow-hidden"
           ref={testRef}
         >
           <Image
             alt="image"
             src={"/Asset/00hero.jpg"}
             fill
-            className="scale-[1.25]   "
+            // className="scale-[1.25]   "
             // style={{paddingTop:isActiveScrollAnimation ? "0px" : "200px"}}
           />
         </div>
