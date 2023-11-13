@@ -6,7 +6,7 @@ interface SplitByLineProps {
 }
 
 const SplitByLine: FC<SplitByLineProps> = ({ children }) => {
-  const words = splitTextByLine(children,50);
+  const words = splitTextByLine(children?.toString(),50);
 
   console.log('children',words)
   return words?.map((word, index) => {

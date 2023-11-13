@@ -1,7 +1,8 @@
 export const splitTextByLine = (
-  text: string,
+  text: string | undefined = undefined,
   maxLength: number
 ): Array<string> => {
+  if(text == undefined) return []
   const words = text.split(" ");
   const result = [];
   let currentLine = "";

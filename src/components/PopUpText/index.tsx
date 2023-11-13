@@ -9,6 +9,7 @@ interface PopUpTextProps {
 const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
   useEffect(() => {
     (() => {
+      //@ts-ignore
       animate(
         ".item",
         isInViewTextContainer ? { WebkitBackgroundSize: "100% 100%" } : {},

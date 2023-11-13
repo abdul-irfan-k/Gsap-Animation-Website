@@ -1,28 +1,18 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useInView,
-  useAnimate,
-} from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import PopUpText from "../PopUpText";
 
 const MainContent = () => {
-  const imageContainer = useRef<HTMLDivElement>();
-  const testRef = useRef<HTMLDivElement>();
-
-  const [isActiveScrollAnimation, setIsActiveScrollAnimation] =
-    useState<boolean>(false);
+  const imageContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const element = imageContainer.current;
+    if (element == undefined) return;
 
     gsap.to(element, {
       scrollTrigger: {
@@ -39,10 +29,6 @@ const MainContent = () => {
         // },
 
         toggleActions: "restart none none none",
-        onToggle: (ev) => {
-          console.log("toggle");
-          setIsActiveScrollAnimation(true);
-        },
       },
       clipPath: `inset(0% 0%)`,
       // top: "0",
@@ -71,7 +57,7 @@ const MainContent = () => {
           clipPath: "inset(10% 30%)",
         }}
       >
-        <div className="relative   h-full w-full overflow-hidden" ref={testRef}>
+        <div className="relative   h-full w-full overflow-hidden">
           <Image
             alt="image"
             src={"/Asset/00hero.jpg"}
