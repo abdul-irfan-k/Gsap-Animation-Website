@@ -7,13 +7,11 @@ import {
   useTransform,
   useSpring,
   useInView,
+  useAnimate,
 } from "framer-motion";
 import ScrollTrigger from "gsap/ScrollTrigger";
-// import ScrollSmoother from 'gsap/ScrollSmoother'
 import gsap from "gsap";
-import { transform } from "next/dist/build/swc";
-import { slideUpAnimation } from "./anim";
-import SplitByLine from "../Shared/SplitByLine/SplitByLine";
+import PopUpText from "../PopUpText";
 
 const MainContent = () => {
   const imageContainer = useRef<HTMLDivElement>();
@@ -52,9 +50,6 @@ const MainContent = () => {
     });
   }, []);
 
-  const animationText = `Stand out from the crowd and make a statement with our sleek and stylish
-  portfolio template that speaks volumes about your creativity.`;
-
   const textContainerRef = useRef<HTMLDivElement>(null);
   const isInViewTextContainer = useInView(textContainerRef);
 
@@ -88,42 +83,16 @@ const MainContent = () => {
         </div>
       </div>
 
-      <div
+      <motion.div
         className="text-center w-[90%] mx-auto text-7xl font-bold "
         ref={textContainerRef}
-        style={
-          {
-            // backgroundImage: "linear-gradient(#fff,#fff)",
-            // WebkitBackgroundClip: "text",
-            // backgroundSize: "30% 100%",
-            // WebkitTextFillColor: "rgba(0,0,0,0.1)",
-          }
-        }
+        variants={{
+          open: {},
+        }}
+        animate={isInViewTextContainer ? "open" : "closed"}
       >
-        <span
-          style={{
-            backgroundImage: "linear-gradient(#000, #000)",
-            WebkitBackgroundClip: "text",
-            backgroundSize: "10% 100%",
-            WebkitTextFillColor: "rgba(255,255,255,0.1)",
-          }}
-        >
-          {animationText.split(" ").map((word, index) => {
-            return (
-              <motion.span
-                key={index}
-                variants={slideUpAnimation}
-                initial="initial"
-                animate={isInViewTextContainer ? "open" : "closed"}
-                style={{}}
-                custom={index}
-              >
-                {word + " "}
-              </motion.span>
-            );
-          })}
-        </span>
-      </div>
+        <PopUpText isInViewTextContainer={isInViewTextContainer} />
+      </motion.div>
 
       <div className=" px-20 py-64 flex  w-full">
         <div className="flex-1">2023</div>
@@ -135,35 +104,8 @@ const MainContent = () => {
           impressive features of our template.
         </div>
       </div>
-
-      <div
-        
-      >
-        
-     <SplitByLine>
-     our template pages are a playground for creativity, 
-          where we leverage an assortment of shortcuts to 
-          build captivating content. This enables us to 
-          demonstrate the limitless potential and showcase the 
-          impressive features of our template.
-     </SplitByLine>
-
-      </div>
     </div>
   );
 };
 
 export default MainContent;
-
-// background-size: 58.9392% 100%;
-// -webkit-text-fill-color: rgba(255,255,255,0.1);
-// background-image: linear-gradient(#fff, #fff);
-// /* position: relative; */
-// /* display: inline; */
-// -webkit-text-fill-color: rgba(255,255,255,0.2);
-// -webkit-background-clip: text;
-// background-repeat: no-repeat;
-// /* background-image: linear-gradient(#000, #000); */
-// background-size: 61.9392% 100%;
-// /* width: auto; */
-// vertical-align: baseline;

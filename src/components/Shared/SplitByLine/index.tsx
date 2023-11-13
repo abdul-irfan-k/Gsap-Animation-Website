@@ -1,3 +1,4 @@
+import { splitTextByLine } from "@/util/SplitTextByLine";
 import React, { FC } from "react";
 
 interface SplitByLineProps {
@@ -5,9 +6,9 @@ interface SplitByLineProps {
 }
 
 const SplitByLine: FC<SplitByLineProps> = ({ children }) => {
-  const words = children?.toString().split(/\r?\n/);
+  const words = splitTextByLine(children,50);
 
-  console.log('children',children)
+  console.log('children',words)
   return words?.map((word, index) => {
     return <div key={index} style={{fontSize:"50px"}}>{word}</div>;
   });
