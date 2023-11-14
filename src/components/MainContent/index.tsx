@@ -1,13 +1,22 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { MotionValue, motion, useInView, useMotionValue } from "framer-motion";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import PopUpText from "../PopUpText";
 
+const clamp = (num: number, min: number, max: number): number => {
+  return Math.min(Math.max(num, min), max);
+};
+
+const scrollTriggerContext = React.createContext<MotionValue>(null);
+export const useScrollTriggerContext = (): MotionValue<any> =>
+  useContext(scrollTriggerContext);
+
 const MainContent = () => {
   const imageContainer = useRef<HTMLDivElement>(null);
+  const progress = useMotionValue(0);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -17,12 +26,36 @@ const MainContent = () => {
     gsap.to(element, {
       scrollTrigger: {
         trigger: element,
-        start: "too 50",
+        start: "top 50",
         // start: "top-=100px",
-        end: "1200 100",
+        end: "1600 100",
         scrub: 1,
         pin: true,
         pinSpacing: true,
+        // markers: {
+        //   startColor: "yellow",
+        //   endColor: "yellow",
+        // },
+
+        toggleActions: "restart none none none",
+        onUpdate: (instance) => {
+          // console.log("instance", instance.progress);
+          if (instance.progress > 0.6) {
+            const pr = (instance.progress - 0.6) * 10 * 0.25;
+            // console.log("on update instance ", clamp(pr, 0, 1));
+            progress.set(clamp(pr, 0, 1));
+          }
+        },
+      },
+      clipPath: `inset(0% 0%)`,
+    });
+    gsap.to(textContainerRef.current, {
+      scrollTrigger: {
+        trigger: textContainerRef.current,
+        start: "300 bottom",
+        // start: "top-=100px",
+        end: "1200 100",
+        scrub: 1,
         // markers: {
         //   startColor: "red",
         //   endColor: "green",
@@ -30,9 +63,7 @@ const MainContent = () => {
 
         toggleActions: "restart none none none",
       },
-      clipPath: `inset(0% 0%)`,
-      // top: "0",
-      // direction: "top",
+      translateY:"-110%"
     });
   }, []);
 
@@ -51,13 +82,13 @@ const MainContent = () => {
 
       <div
         ref={imageContainer}
-        className="mt-32 relative  flex align-top h-[90vh] w-full  overflow-hidden"
+        className=" mt-32 relative  flex flex-col align-top  w-full  overflow-hidden"
         style={{
           width: "100%",
           clipPath: "inset(10% 30%)",
         }}
       >
-        <div className="relative   h-full w-full overflow-hidden">
+        <div className="relative  h-[90vh] w-full overflow-hidden">
           <Image
             alt="image"
             src={"/Asset/00hero.jpg"}
@@ -67,20 +98,21 @@ const MainContent = () => {
             // style={{paddingTop:isActiveScrollAnimation ? "0px" : "200px"}}
           />
         </div>
+        <motion.div
+          className=" top-full text-center w-[90%] translate-y-[10%] mx-auto text-7xl font-bold "
+          ref={textContainerRef}
+          variants={{
+            open: {},
+          }}
+          // animate={isInViewTextContainer ? "open" : "closed"}
+        >
+          <scrollTriggerContext.Provider value={progress}>
+            <PopUpText isInViewTextContainer={isInViewTextContainer} />
+          </scrollTriggerContext.Provider>
+        </motion.div>
       </div>
 
-      <motion.div
-        className="text-center w-[90%] mx-auto text-7xl font-bold "
-        ref={textContainerRef}
-        variants={{
-          open: {},
-        }}
-        animate={isInViewTextContainer ? "open" : "closed"}
-      >
-        <PopUpText isInViewTextContainer={isInViewTextContainer} />
-      </motion.div>
-
-      <div className=" px-20 py-64 flex  w-full">
+      <div className=" px-20 py-10 flex  w-full">
         <div className="flex-1">2023</div>
         <div className="flex-1 font-medium text-lg">
           our template pages are a playground for creativity, <br />
