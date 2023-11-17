@@ -17,8 +17,8 @@ const HomePage = () => {
   });
   return (
     <div>
-      {/* <Header /> */}
-      {/* <MainContent /> */}
+      <Header />
+      <MainContent />
       {/* <Test /> */}
       <Project />
       <Service />
