@@ -39,12 +39,8 @@ const MainContent = () => {
 
         toggleActions: "restart none none none",
         onUpdate: (instance) => {
-          // console.log("instance", instance.progress);
-          if (instance.progress > 0.6) {
             const pr = (instance.progress - 0.6) * 10 * 0.25;
-            // console.log("on update instance ", clamp(pr, 0, 1));
             progress.set(clamp(pr, 0, 1));
-          }
         },
       },
       clipPath: `inset(0% 0%)`,
@@ -82,7 +78,7 @@ const MainContent = () => {
 
       <div
         ref={imageContainer}
-        className=" mt-32 relative  flex flex-col align-top  w-full  overflow-hidden"
+        className=" mt-32 relative   flex flex-col align-top  w-full  overflow-hidden"
         style={{
           width: "100%",
           clipPath: "inset(10% 30%)",
@@ -112,8 +108,11 @@ const MainContent = () => {
         </motion.div>
       </div>
 
-      <div className=" px-20 py-10 flex  w-full">
-        <div className="flex-1">2023</div>
+      <div className=" px-20 py-10 flex translate-y-[-50%]  w-full">
+        <div className="flex-1 flex justify-evenly">
+          <div>2023</div>
+          <div>Portfolio website</div>
+        </div>
         <div className="flex-1 font-medium text-lg">
           our template pages are a playground for creativity, <br />
           where we leverage an assortment of shortcuts to <br />

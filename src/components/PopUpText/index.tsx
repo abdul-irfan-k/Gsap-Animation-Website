@@ -32,7 +32,7 @@ const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
   useEffect(() => {
     // setLines(line)
     bg.on("change", (vl) => {
-      // console.log('change',vl)
+      console.log('change',bg.get())
       setTextFillProgress(bg.get());
     });
   }, []);
