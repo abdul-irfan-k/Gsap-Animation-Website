@@ -2,6 +2,7 @@
 import gsap from "gsap";
 import React, { useEffect, useRef } from "react";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import ServiceDescription from "./ServiceDescription";
 
 const Service = () => {
   const arr: Array<{ light: string; bold: string }> = [
@@ -25,11 +26,12 @@ const Service = () => {
 
   useEffect(() => {
     const element = serviceContainerRef.current;
-    if (element == undefined) return;
+    if (element == undefined || serviceScrollContainerRef.current == undefined)
+      return;
 
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.to(serviceContainerRef.current, {
+    gsap.to(element, {
       scrollTrigger: {
         trigger: element,
         start: "top bottom",
@@ -59,8 +61,8 @@ const Service = () => {
 
         toggleActions: "restart none none none",
       },
-      transform: "rotateX(180deg)",
-    })
+      transform: "rotateX(150deg)",
+    });
   }, []);
 
   return (
@@ -115,7 +117,8 @@ const Service = () => {
             })}
           </div>
         </div>
-        <div>sadfasdf</div>
+
+        <ServiceDescription />
       </div>
     </div>
   );

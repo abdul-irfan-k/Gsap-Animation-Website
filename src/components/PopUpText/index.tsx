@@ -11,20 +11,8 @@ interface PopUpTextProps {
 const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
   const progress = useScrollTriggerContext();
   const [textFillProgress, setTextFillProgress] = useState<number>(-1);
-  // const [lines,setLines] = useState<Array<string>>([])
   const bg = useTransform(progress, [0, 1], [0, 100]);
-  // const bg = useTransform(progress, (val) => {
-  //   return `${val*100}% 100%`
-  // });
-
-  // useEffect(() => {
-  //   console.log('bg',bg)
-  //   bg.on("change", (vl) => {
-  //     console.log("changed val", vl, bg.get());
-  //   });
-  //   return () => {
-  //   };
-  // }, [bg]);
+ 
   const animationText = `Stand out from the crowd and make a statement with our sleek and stylish
     portfolio template that speaks volumes about your creativity.`;
   const lines = splitTextByLine(animationText, 35);
@@ -37,21 +25,6 @@ const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
     });
   }, []);
 
-  useEffect(() => {
-    (() => {
-      //@ts-ignore
-      // animate(
-      //   ".item",
-      //   isInViewTextContainer ? { WebkitBackgroundSize: "100% 100%" } : {},
-      //   {
-      //     duration: 0.6,
-      //     delay: isInViewTextContainer
-      //       ? stagger(0.5, { startDelay: 0, from: "first" })
-      //       : 0,
-      //   }
-      // );
-    })();
-  }, [isInViewTextContainer]);
 
   return (
     <div>
@@ -63,7 +36,7 @@ const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
         );
 
         return (
-          <motion.span
+          <span
             key={index}
             initial={false}
             custom={index}
@@ -81,7 +54,7 @@ const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
             {line.split(" ").map((word, wordIndex) => {
               return <span key={wordIndex}>{word + " "}</span>;
             })}
-          </motion.span>
+          </span>
         );
       })}
     </div>
