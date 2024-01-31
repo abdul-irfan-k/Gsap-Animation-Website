@@ -10,9 +10,9 @@ const clamp = (num: number, min: number, max: number): number => {
   return Math.min(Math.max(num, min), max);
 };
 
+// @ts-ignore
 const scrollTriggerContext = React.createContext<MotionValue>(null);
-export const useScrollTriggerContext = (): MotionValue<any> =>
-  useContext(scrollTriggerContext);
+export const useScrollTriggerContext = () => useContext(scrollTriggerContext);
 
 const MainContent = () => {
   const imageContainer = useRef<HTMLDivElement>(null);
@@ -39,8 +39,8 @@ const MainContent = () => {
 
         toggleActions: "restart none none none",
         onUpdate: (instance) => {
-            const pr = (instance.progress - 0.6) * 10 * 0.25;
-            progress.set(clamp(pr, 0, 1));
+          const pr = (instance.progress - 0.6) * 10 * 0.25;
+          progress.set(clamp(pr, 0, 1));
         },
       },
       clipPath: `inset(0% 0%)`,
@@ -59,7 +59,7 @@ const MainContent = () => {
 
         toggleActions: "restart none none none",
       },
-      translateY:"-110%"
+      translateY: "-110%",
     });
   }, []);
 
@@ -110,8 +110,10 @@ const MainContent = () => {
 
       <div className=" px-20 py-10 flex translate-y-[-50%]  w-full">
         <div className="flex-1 flex justify-evenly">
-          <div>2023</div>
-          <div>Portfolio website</div>
+          <div className="px-32 w-full flex justify-between ">
+            <div>2023</div>
+            <div>Portfolio website</div>
+          </div>
         </div>
         <div className="flex-1 font-medium text-lg">
           our template pages are a playground for creativity, <br />

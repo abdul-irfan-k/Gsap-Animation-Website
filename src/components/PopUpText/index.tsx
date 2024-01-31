@@ -20,7 +20,7 @@ const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
   useEffect(() => {
     // setLines(line)
     bg.on("change", (vl) => {
-      console.log('change',bg.get())
+      // console.log('change',bg.get())
       setTextFillProgress(bg.get());
     });
   }, []);
@@ -38,7 +38,6 @@ const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
         return (
           <span
             key={index}
-            initial={false}
             custom={index}
             style={{
               backgroundImage: "linear-gradient(#fff, #fff)",
