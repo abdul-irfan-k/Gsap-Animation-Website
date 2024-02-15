@@ -1,6 +1,5 @@
 import { splitTextByLine } from "@/util/SplitTextByLine";
-import { MotionValue, frame, motion, useTransform } from "framer-motion";
-import { animate, stagger } from "framer-motion/dom";
+import {  motion, useTransform } from "framer-motion";
 import React, { FC, useEffect, useState } from "react";
 import { useScrollTriggerContext } from "../MainContent";
 import { ArrayTextFillCalculation } from "@/util/ArrayTextFillCalculation";
@@ -36,7 +35,7 @@ const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
         );
 
         return (
-          <span
+          <motion.span
             key={index}
             custom={index}
             style={{
@@ -53,7 +52,7 @@ const PopUpText: FC<PopUpTextProps> = ({ isInViewTextContainer }) => {
             {line.split(" ").map((word, wordIndex) => {
               return <span key={wordIndex}>{word + " "}</span>;
             })}
-          </span>
+          </motion.span>
         );
       })}
     </div>

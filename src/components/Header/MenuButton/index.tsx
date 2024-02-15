@@ -1,5 +1,4 @@
 import MagneticEffect from "@/components/Shared/TextFillAnimation/MagneticEffect";
-import useHover from "@/hooks/Use-Hover";
 import React, { forwardRef } from "react";
 
 interface MenuButtonProps {
@@ -7,7 +6,7 @@ interface MenuButtonProps {
 }
 const MenuButtonComponent = (
   { menuButtonHovered }: MenuButtonProps,
-  ref: HTMLDivElement
+  ref: React.LegacyRef<HTMLDivElement>
 ) => {
   return (
     <div className="ml-3 relative  my-auto " ref={ref}>
@@ -37,5 +36,5 @@ const MenuButtonComponent = (
     </div>
   );
 };
-
+//@ts-ignore
 export default forwardRef<HTMLDivElement, MenuButtonProps>(MenuButtonComponent);

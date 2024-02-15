@@ -30,6 +30,7 @@ const MagneticEffect: FC<MagneticEffectProps> = ({ children }) => {
     <motion.div
       style={{ position: "relative" }}
       ref={containerRef}
+      //@ts-ignore
       onMouseMove={mouseMoveHandler}
       onMouseLeave={resetHandler}
       animate={{ x: position.x, y: position.y }}

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React, { FC } from "react";
 
 interface ArticleCardProps {
-  date: string | Date;
+  date: string;
   topic: string;
   contentHeading: string;
   content: string;
